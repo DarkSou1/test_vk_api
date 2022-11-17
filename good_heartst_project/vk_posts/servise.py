@@ -1,9 +1,11 @@
 import os
 import time
 
-import psycopg2
-
+import django
 from good_heartst_project.settings import COUNT_OF_POSTS, PHOTO_SIZE, TIME_SLEEP
+from .models import Vk_posts
+
+import psycopg2
 
 import vk_api
 from vk_api.execute import VkFunction
@@ -43,7 +45,6 @@ def parser_attachments(some_dict):
 def parser_json(data):
     """Функция проходит по посту и забирает необходимые данные для бд."""
     result_list = list()
-    # print(data, type(data))
     for item in data:
         post_dict = dict()
         post_dict['id'] = item['id']
@@ -59,6 +60,12 @@ def parser_json(data):
 
 
 def load_to_data_base(data):
+    # for element in data:
+    #     Vk_posts.objects.create(id=element['id'],
+    #                             date=element['date'],
+    #                             text_post=element['text_post'],
+    #                             photo=element['photo'])
+    # return None
     try:
         connect = psycopg2.connect(
             dbname=os.getenv('NAME'),
@@ -80,8 +87,8 @@ def load_to_data_base(data):
         except psycopg2.ProgrammingError:
             print('Allready exists')
     with cursor:
-        request_sql = """INSERT INTO test_vk (id, date, test_post, photo) 
-                      VALUES (%s, %s, %s, %s) 
+        request_sql = """INSERT INTO test_vk (id, date, test_post, photo)
+                      VALUES (%s, %s, %s, %s)
                       ON CONFLICT (id) DO NOTHING;"""
         for element in data:
             try:
@@ -96,7 +103,9 @@ def load_to_data_base(data):
                 connect.close()
 
 
-def start_parsing():
+if __name__ == '__main__':
+    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'good_heartst_project.settings')
+    django.setup()
     while True:
         data = get_posts_from_vk()
         data = parser_json(data)
