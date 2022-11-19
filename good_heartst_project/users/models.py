@@ -14,7 +14,7 @@ ROLES = (
 )
 
 
-class User(AbstractUser):
+class MyUser(AbstractUser):
     """Кастомная модель пользователя."""
     username = models.CharField(verbose_name='Ник пользователя',
                                 max_length=100,

@@ -15,18 +15,21 @@ ALLOWED_HOSTS = ['web', 'localhost', 'dogdogmote.ddns.net', '127.0.0.1', ]
 # Application definition
 
 INSTALLED_APPS = [
+    # django_apps
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # project_apps
     'sorl.thumbnail',
     'social_django',
     'animals',
     'findhouse',
     'users',
     'core',
+    'vk_posts',
 ]
 
 AUTHENTICATION_BACKENDS = (
@@ -73,24 +76,16 @@ WSGI_APPLICATION = 'good_heartst_project.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        "ENGINE": os.getenv('ENGINE', default="django.db.backends.postgresql_psycopg2"),
+        "NAME": os.getenv('DB_NAME'),
+        "USER": os.getenv('DB_USER'),
+        "PASSWORD": os.getenv('DB_PASSWORD'),
+        "HOST": os.getenv('DB_HOST'),
+        "PORT": os.getenv('DB_PORT'),
     }
 }
-
-# DATABASES = {
-#     'default': {
-#         "ENGINE": os.getenv('ENGINE', default="django.db.backends.postgresql_psycopg2"),
-#         "NAME": os.getenv('NAME', default=' '),
-#         "USER": os.getenv('USER', default=''),
-#         "PASSWORD": os.getenv('PASSWORD', default=' '),
-#         "HOST": os.getenv('HOST', default='db'),
-#         "PORT": os.getenv('PORT', default=5433),
-#     }
-# }
 
 
 # Password validation
@@ -111,7 +106,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-AUTH_USER_MODEL = 'users.User'
+AUTH_USER_MODEL = 'users.MyUser'
 
 
 # Internationalization
@@ -141,3 +136,8 @@ MEDIA_URL = '/media/'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# SCRIPT FOR VK_POSTS
+COUNT_OF_POSTS = 100
+PHOTO_SIZE = 4
+TIME_SLEEP = 3600
