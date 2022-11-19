@@ -1,9 +1,9 @@
 from django.contrib import admin
 
-from .models import User
+from .models import MyUser
 
 
-@admin.register(User)
+@admin.register(MyUser)
 class AdminUser(admin.ModelAdmin):
     list_display = ('username',
                     'role',

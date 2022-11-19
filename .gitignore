@@ -128,4 +128,6 @@ dmypy.json
 # Pyre type checker
 .pyre/
 # media
-./good_heartst_project/media
+#./good_heartst_project/media
+/good_heartst_project/media
+/good_heartst_project/vk_posts/servise_logger
