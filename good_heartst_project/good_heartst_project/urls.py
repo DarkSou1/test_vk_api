@@ -11,6 +11,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('animals.urls')),
     path('', include('social_django.urls', namespace='social')),
+    path('vk_posts', include('vk_posts.urls')),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL,

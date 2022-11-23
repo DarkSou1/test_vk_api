@@ -6,6 +6,7 @@ from django.db.models import Count
 from .forms import PostForm
 from .models import Category, MainAnimals
 
+
 class AnimalList(ListView):
     queryset = MainAnimals.objects.all()[:15]
     context_object_name ='animal'
@@ -20,6 +21,7 @@ class AnimalList(ListView):
 
     def get_queryset(self):
         return MainAnimals.objects.filter(is_publish=True,)
+
 
 class CategoryList(ListView):
     queryset = Category
