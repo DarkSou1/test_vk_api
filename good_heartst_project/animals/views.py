@@ -1,7 +1,4 @@
-from django.shortcuts import get_object_or_404, render, get_list_or_404
 from django.views.generic import ListView, DetailView, CreateView
-from django.core.paginator import Paginator
-from django.db.models import Count
 
 from .forms import PostForm
 from .models import Category, MainAnimals

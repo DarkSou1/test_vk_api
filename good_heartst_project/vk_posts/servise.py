@@ -92,7 +92,7 @@ def load_to_data_base(data):
         message = f'Postgres connecntion error {error}'
         logger.critical(message)
         return error
-    cursor = connect.cursor() # Запуск курсора
+    cursor = connect.cursor()  # Запуск курсора
     request_sql = """INSERT INTO vk_posts_vk_posts (id, date, text_post, photo)
                   VALUES (%s, %s, %s, %s)
                   ON CONFLICT (id) DO NOTHING;"""
