@@ -25,8 +25,6 @@ INSTALLED_APPS = [
     # project_apps
     'sorl.thumbnail',
     'social_django',
-    'animals',
-    'findhouse',
     'users',
     'core',
     'vk_posts',
