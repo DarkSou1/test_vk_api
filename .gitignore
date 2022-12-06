@@ -131,3 +131,10 @@ dmypy.json
 #./good_heartst_project/media
 /good_heartst_project/media
 /good_heartst_project/vk_posts/servise_logger
+
+# static
+/good_heartst_project/static
+
+# vk_parser files
+/good_heartst_project/vk_config.v2.json
+/good_heartst_project/serive_logger

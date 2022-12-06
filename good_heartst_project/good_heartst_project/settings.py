@@ -25,22 +25,26 @@ INSTALLED_APPS = [
     # project_apps
     'sorl.thumbnail',
     'social_django',
-    'animals',
-    'findhouse',
     'users',
     'core',
     'vk_posts',
 ]
 
 AUTHENTICATION_BACKENDS = (
+    'social_core.backends.vk.VKOAuth2',
     'django.contrib.auth.backends.ModelBackend',
-    'social_core.backends.vk.VKontakteOpenAPI',
 )
 
 SOCIAL_AUTH_VK_OAUTH2_KEY = os.getenv('SOCIAL_AUTH_VK_OAUTH2_KEY')
 SOCIAL_AUTH_VK_OAUTH2_SECRET = os.getenv('SOCIAL_AUTH_VK_OAUTH2_SECRET')
 
+SOCIAL_AUTH_VK_OAUTH2_SCOPE = ['email']
+
 SOCIAL_AUTH_URL_NAMESPACE = 'social'
+
+SOCIAL_AUTH_POSTGRES_JSONFIELD = True
+
+LOGIN_REDIRECT_URL = '/'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -65,6 +69,10 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social_django.context_processors.backends',
+                'social_django.context_processors.login_redirect'
+                # 'social.apps.django_app.context_processors.backends',
+                # 'social.apps.django_app.cont'
             ],
         },
     },
