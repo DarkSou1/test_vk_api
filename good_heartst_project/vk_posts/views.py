@@ -22,13 +22,13 @@ class AnimalList(ListView):
     model = Vk_posts
     paginate_by = 10
     extra_context = {'title': 'Главная'}
-    template_name = 'VK_api/cat.html'
+    template_name = 'vk_posts/cat.html'
     context_object_name = 'cat'
 
 
     def  get_queryset(self):
         """Функция выводить все записи с упоминание котов"""
-        list_cat = Vk_posts.objects.filter(
+        list_cat = VkPosts.objects.filter(
                                 (Q(text_post__icontains='кот') \
                                 | Q(text_post__icontains='кош'))\
                                 & ~Q(text_post__icontains='соб')
@@ -41,7 +41,7 @@ class DogView(ListView):
     paginate_by = 10
     extra_context = {'title': 'Главная'}
     context_object_name = 'dog'
-    template_name = 'VK_api/dog.html'
+    template_name = 'vk_posts/dog.html'
 
     def get_queryset(self):
         """Функция выводить все записи с упоминание собак"""
@@ -52,19 +52,20 @@ class DogView(ListView):
                                 )
         return list_dog
 
+
 class DogSearchHome(ListView):
     model = Vk_posts
     paginate_by = 10
     extra_context = {'title': 'Главная'}
     context_object_name = 'dog'
-    template_name = 'VK_api/dog_search.html'
+    template_name = 'vk_posts/dog_search.html'
 
     def get_queryset(self):
         dog_search = Vk_posts.objects.filter((Q(text_post__icontains='соб') \
-                                                | Q(text_post__icontains='щен'))\
-                                                & (~Q(text_post__icontains='кот') \
+                                             | Q(text_post__icontains='щен')) \
+                                            & (~Q(text_post__icontains='кот') \
                                                 | ~Q(text_post__icontains='кош')) \
-                                                & ((Q(text_post__icontains='ищет') \
+                                            & ((Q(text_post__icontains='ищет') \
                                                 & Q(text_post__icontains='дом')) \
                                                 | (Q(text_post__icontains='отда') \
                                                 | Q(text_post__icontains='приют')\
@@ -78,9 +79,10 @@ class CatSearchHome(ListView):
     paginate_by = 10
     extra_context = {'title': 'Главная'}
     context_object_name = 'cat'
-    template_name = 'VK_api/cat_search.html'
+    template_name = 'vk_posts/cat_search.html'
     """дописываю, выдает неправильно данные """
     def get_queryset(self):
-        cat_search = Vk_posts.objects.filter((Q(text_post__icontains='кот')| Q(text_post__icontains='кош')) & Q(text_post__icontains='отд'))
+        cat_search = Vk_posts.objects.filter((Q(text_post__icontains='кот') | Q(text_post__icontains='кош')) & Q(
+            text_post__icontains='отд'))
         return cat_search
 
