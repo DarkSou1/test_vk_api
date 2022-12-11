@@ -44,6 +44,23 @@ SOCIAL_AUTH_URL_NAMESPACE = 'social'
 
 SOCIAL_AUTH_POSTGRES_JSONFIELD = True
 
+SOCIAL_AUTH_CREATE_USERS = True # разрешает создавать пользователей через social_auth
+
+SOCIAL_AUTH_PIPELINE = (
+    'social_core.pipeline.social_auth.social_uid',
+    # Получить социальный uid из любой службы, через которую мы авторизуемся.
+    'social_core.pipeline.social_auth.social_user',
+    # Проверяет, привязана ли уже текущая социальная учетная запись к сайту.
+    'social_core.pipeline.user.create_user',
+    # Создайте учетную запись пользователя, если мы ее еще не нашли.
+    'social_core.pipeline.user.user_details',
+    # Обновите запись пользователя, указав любую измененную информацию из службы аутентификации
+    'social_core.pipeline.social_auth.associate_user',
+    # Создайте запись, которая связывает социальную учетную запись с пользователем.
+    'social_core.pipeline.social_auth.load_extra_data',
+    # Заполнить поле extra_data в социальной записи значениями
+)
+
 LOGIN_REDIRECT_URL = '/'
 
 MIDDLEWARE = [
@@ -57,7 +74,9 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'good_heartst_project.urls'
+
 TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',

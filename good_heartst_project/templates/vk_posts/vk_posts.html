@@ -1,42 +1,29 @@
-<!--{% include 'include/base.html'%}-->
-<!--{% load static %}-->
-<!--{% load thumbnail %}-->
-<!--{% block content %}-->
-<!--{% for post in vk_posts%}-->
-<!--<div class="container">-->
-<!--    <div class="post">-->
-<!--        <div class="post-image">-->
-<!--            <div class="wrapper exmp3">-->
-<!--                <img src="{{ post.photo }}">-->
-<!--            </div>-->
-<!--        </div>-->
-<!--        <div class="post-content">-->
-<!--            <div class="post-header">-->
-<!--                &lt;!&ndash;<a href ="{{ ani.get_absolute_url }}">&ndash;&gt;-->
-<!--                &lt;!&ndash;<h1>{{ani.text_post }}</h1>&ndash;&gt;-->
-<!--                <div class="post-meta">-->
-<!--                    <time datetime="2019-04-01">{{post.date}}</time>-->
-
-<!--                </div>-->
-<!--            </div>-->
-<!--            <p>{{post.text_post|truncatewords:80|linebreaks }}-->
-<!--            </p>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</div>-->
-<!--{% endfor %}-->
-<!--{% endblock%}-->
-<!--{% include 'include/footer.html' %}-->
 {% include 'include/base.html'%}
 {% load static %}
 {% load thumbnail %}
 {% block content %}
 {% for post in vk_posts%}
-<style>
-
-</style>
-
-
+<div class="container">
+    <div class="post">
+        <div class="post-image">
+            <div class="wrapper exmp3">
+               <img src="{{ post.photo }}">
+            </div>
+        </div>
+        <div class="post-content">
+            <div class="post-header">
+                <a href ="{{ ani.get_absolute_url }}">
+                <h1>{{ani.text_post }}</h1>
+                <div class="post-meta">
+                    <time datetime="2019-04-01">{{post.date}}</time>
+                </div>
+                </a>
+            </div>
+            <p>{{post.text_post|truncatewords:80|linebreaks }}
+            </p>
+        </div>
+    </div>
+</div>
 {% endfor %}
 {% endblock%}
 {% include 'include/footer.html' %}
