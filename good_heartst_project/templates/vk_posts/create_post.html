@@ -1,0 +1,13 @@
+{% include 'include/base.html'%}
+{% load static %}
+{% load thumbnail %}
+{% block content %}
+{% for post in vk_posts%}
+<form action="/your-name/" method="post">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="Submit">
+</form>
+{% endfor %}
+{% endblock%}
+{% include 'include/footer.html' %}

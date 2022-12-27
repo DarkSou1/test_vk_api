@@ -44,7 +44,9 @@ SOCIAL_AUTH_URL_NAMESPACE = 'social'
 
 SOCIAL_AUTH_POSTGRES_JSONFIELD = True
 
-SOCIAL_AUTH_CREATE_USERS = True # разрешает создавать пользователей через social_auth
+# SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/'
+
+SOCIAL_AUTH_CREATE_USERS = True  # разрешает создавать пользователей через social_auth
 
 SOCIAL_AUTH_PIPELINE = (
     'social_core.pipeline.social_auth.social_uid',
@@ -89,7 +91,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'social_django.context_processors.backends',
-                'social_django.context_processors.login_redirect'
+                'social_django.context_processors.login_redirect',
                 # 'social.apps.django_app.context_processors.backends',
                 # 'social.apps.django_app.cont'
             ],

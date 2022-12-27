@@ -1,8 +1,10 @@
 from django.views.generic import ListView
 from django.db.models import Q
+from django.views.generic import CreateView
+from django.urls import reverse_lazy
 
 from .models import Vk_posts
-
+from .forms import CreatePostForm
 
 # class VkPostsList(ListView):
 #     queryset = Vk_posts.objects.all()[:10]
@@ -18,17 +20,17 @@ from .models import Vk_posts
 #     def get_queryset(self):
 #         return Vk_posts.objects.all()[:10]
 
+
 class AnimalList(ListView):
     model = Vk_posts
     paginate_by = 10
     extra_context = {'title': 'Главная'}
-    template_name = 'vk_posts/cat.html'
+    template_name = 'animals/index.html' # 'vk_posts/vk_posts.html'  # поправить при мерже в main
     context_object_name = 'cat'
 
-
-    def  get_queryset(self):
+    def get_queryset(self):
         """Функция выводить все записи с упоминание котов"""
-        list_cat = VkPosts.objects.filter(
+        list_cat = Vk_posts.objects.filter(
                                 (Q(text_post__icontains='кот') \
                                 | Q(text_post__icontains='кош'))\
                                 & ~Q(text_post__icontains='соб')
@@ -86,3 +88,16 @@ class CatSearchHome(ListView):
             text_post__icontains='отд'))
         return cat_search
 
+
+class PostCreate(CreateView):
+    form_class = CreatePostForm
+    success_url = reverse_lazy('vk_posts:cat_list')
+    template_name = 'vk_posts/vk_posts.html'
+
+    def form_valid(self, form):
+        obj = form.save(commit=False)
+        obj.author = self.request.user
+        return super(PostCreate, self).form_valid(form)
+
+    # def post(self, request, *args, **kwargs):
+    #     pass

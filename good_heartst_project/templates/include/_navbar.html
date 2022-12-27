@@ -2,7 +2,7 @@
   <div class="container-fluid">z
     <a class="navbar-brand" href="{% url 'users:signup'%}">РЕГИСТРАЦИЯ</a>
     <a class="navbar-brand" href="{% url 'users:login'%}">ВХОД</a>
-    <a href="{% url 'social:begin' 'vk-oauth2' %}">VK+</a>
+    <a href="{% url 'vk_posts:post_create' %}">Создать пост</a>
     <a class="navbar-brand" href="{% url 'users:password_change'%}">Сменить пароль</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
       <span class="navbar-toggler-icon"></span>
@@ -12,7 +12,6 @@
         <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Доброе сердце Элиста</h5>
         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
       </div>
-
     </div>
   </div>
 </nav>

@@ -42,10 +42,12 @@ class SendWallPost(object):
     def __init__(self, message, user_phone_number, access_token,
                  photo=None, publish_date=None, close_comments=0,
                  attachments=None):
-        vk_session = vk_api.VkApi(login=user_phone_number,
-                                  token=access_token)
-        vk_session.auth(token_only=True)
-        self.vk = vk_session
+        # vk_session = vk_api.VkApi(login=user_phone_number,
+        #                           token=access_token,
+        #                           scope=8192)
+        # vk_session.auth(token_only=True)
+        self.user_phone_number = user_phone_number
+        self.access_token = access_token
         self.message = message
         self.publish_date = publish_date
         self.close_comments = close_comments
@@ -81,6 +83,11 @@ class SendWallPost(object):
         else:
             photo_id, owner_id = self._get_wall_upload_server()
             return self._send_post_with_attachments(photo_id, owner_id)
+
+    def get_session(self):
+        session = vk_api.VkApi(login=self.user_phone_number,
+                               token=self.access_token)
+        return session.auth()
 
 
 def get_posts_from_vk():

@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import AnimalList, DogView, DogSearchHome, CatSearchHome
+from .views import AnimalList, DogView, DogSearchHome, CatSearchHome, PostCreate
 
 app_name = 'vk_posts'
 
@@ -8,4 +8,5 @@ urlpatterns = [
     path('dog/', DogView.as_view(), name='dog_list'),
     path('dog_search/', DogSearchHome.as_view(), name='Dog_search'),
     path('cat_search/', CatSearchHome.as_view(), name='Cat_search'),
+    path('post/', PostCreate.as_view(), name='post_create')
 ]
