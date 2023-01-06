@@ -1,3 +1,9 @@
+import os
+
+import requests
+import vk_api
+from social_django.models import UserSocialAuth
+
 from django.views.generic import ListView
 from django.db.models import Q
 from django.views.generic import CreateView
@@ -97,6 +103,27 @@ class PostCreate(CreateView):
     def form_valid(self, form):
         obj = form.save(commit=False)
         obj.author = self.request.user
+        social_user = UserSocialAuth.objects.get(user=self.request.user)
+
+        access_token = social_user.extra_data['access_token']
+        response = requests.get('https://api.vk.com/method/wall.post?', params={
+            'access_token': access_token,
+            'v': 5.131,
+            'owner_id': -217638481,
+            'from_group': 1,
+            'message': 'из джанго!!!',
+        })
+        # response = requests.get('https://api.vk.com/method/wall.get?',
+        #                         params={'access_token': access_token,
+        #                                 'v': 5.131,
+        #                                 'owner_id': 261945461})
+        # response = requests.get('https://oauth.vk.com/authorize',
+        #                         params={
+        #                             'client_id': 51509590,
+        #                             'scope': 1073737727,
+        #                             'redirect_uri': 'http://api.vk.com/blank.html',
+        #                         })
+        print(response.text)
         return super(PostCreate, self).form_valid(form)
 
     # def post(self, request, *args, **kwargs):

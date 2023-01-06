@@ -48,21 +48,21 @@ class PostToVk(models.Model):
     #          update_fields=None):
     #     pass
     #     # social_user = UserSocialAuth.objects.get(user=self.author)
-        # # print(social_user)
-        # print('--------------')
-        # print(social_user.extra_data['access_token'])
-        # api_method = 'https://api.vk.com/method/wall.post'
-        # response = requests.post('https://api.vk.com/method/wall.post', data={
-        #     # 'token': os.getenv('ACCESS_TOKEN'),
-        #     'token': social_user.extra_data['access_token'],
-        #     'v': 5.131,
-        #     'owner_id': -217638481,
-        #     'from_group': 0,
-        #     'message': self.text,
-        # })
-        # print(response.json())
-        # print('--------------')
-        # # super().save()
+    #     # print(social_user)
+    #     print('--------------')
+    #     print(social_user.extra_data['access_token'])
+    #     api_method = 'https://api.vk.com/method/wall.post'
+    #     response = requests.post('https://api.vk.com/method/wall.post', data={
+    #         # 'token': os.getenv('ACCESS_TOKEN'),
+    #         'token': social_user.extra_data['access_token'],
+    #         'v': 5.131,
+    #         'owner_id': -217638481,
+    #         'from_group': 0,
+    #         'message': self.text,
+    #     })
+    #     print(response.json())
+    #     print('--------------')
+    #     # super().save()
 
     class Meta:
         verbose_name = 'Модель для постинга в Vk'
