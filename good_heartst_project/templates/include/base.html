@@ -1,21 +1,30 @@
-{% load static %}
 <!DOCTYPE html>
+{% load static %}
 <html lang="ru">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap demo</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
-    <link rel="stylesheet" href="./style.css">
-    <link rel="stylesheet" type="text/css" href="{% static 'animals.css' %}">
+    <!--<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+					 integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+		-->
+		<link rel="stylesheet" href="{% static 'css/style.css' %}">
+		<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;700&display=swap" rel="stylesheet">
+    <!--<link rel="stylesheet" type="text/css" href="{% static 'animals.css' %}">
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet"/> 
+    -->
+    <title>Доброе сердце ЭЛИСТА</title>
   </head>
   <body>
-  
-    {% block content%}
-    {% include 'include/_navbar.html'%}
-    {% endblock %}
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+    <header class="header">
+			{% include 'include/header.html'%}
+    </header>
+    <main>
+			{% block content%}
+			{% endblock %}
+    </main>
+    <footer>
+			{% include 'include/footer.html' %}
+    </footer>
   </body>
 </html>
 

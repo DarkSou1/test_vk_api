@@ -33,6 +33,63 @@ vk_get_wall_posts = VkFunction(args=('values',), code='''
 ''')
 
 
+class SendWallPost(object):
+    """Отправляет пока текстовый пост в группу сообщества."""
+    OWNER_ID = -215511557
+    OWNER_ID_OUT = 215511557
+    FROM_GROUP = 1
+
+    def __init__(self, message, user_phone_number, access_token,
+                 photo=None, publish_date=None, close_comments=0,
+                 attachments=None):
+        # vk_session = vk_api.VkApi(login=user_phone_number,
+        #                           token=access_token,
+        #                           scope=8192)
+        # vk_session.auth(token_only=True)
+        self.user_phone_number = user_phone_number
+        self.access_token = access_token
+        self.message = message
+        self.publish_date = publish_date
+        self.close_comments = close_comments
+        self.attachments = attachments
+        self.photo = photo
+
+    def _send_text_post(self):
+        """Отправка поста на стену сообщества если пост чисто текстовый."""
+        post_id = self.vk.method('wall.post', {'message': self.message,
+                                               'owner_id': self.OWNER_ID})
+        return post_id
+
+    def _send_post_with_attachments(self, photo_id, owner_id):
+        """Отправка поста на стену сообщесва
+         если пост содержит объекты приложенные к записи."""
+        attachment_str = f'photo{owner_id}_{photo_id}'
+        post_id = self.vk.method('wall.post', {'message': self.message,
+                                               'owner_id': self.OWNER_ID,
+                                               'attachments': attachment_str})
+        return post_id
+
+    def _get_wall_upload_server(self):
+        """Метод получения url адреса для загрузки фотографии на сервер."""
+        upload = vk_api.VkUpload(self.vk)
+        response = upload.photo_wall(self.photo, group_id=self.OWNER_ID_OUT)
+        photo_id, owner_id = response[0]['id'], response[0]['owner_id']
+        return photo_id, owner_id
+
+    def send(self):
+        """SO POOR EVENT LOOP."""
+        if self.photo is None:
+            return self._send_text_post()
+        else:
+            photo_id, owner_id = self._get_wall_upload_server()
+            return self._send_post_with_attachments(photo_id, owner_id)
+
+    def get_session(self):
+        session = vk_api.VkApi(login=self.user_phone_number,
+                               token=self.access_token)
+        return session.auth()
+
+
 def get_posts_from_vk():
     """Взятие постов из vk group."""
 

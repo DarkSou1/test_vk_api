@@ -8,3 +8,4 @@ class SingUp(CreateView):
     form_class = CreatingForm
     success_url = reverse_lazy('animals:list')
     template_name = 'users/signup.html'
+

@@ -11,8 +11,7 @@ urlpatterns = [
     path('auth/', include('django.contrib.auth.urls')),
     path('admin/', admin.site.urls),
     # path('', include('animals.urls')),
-
-    path('vk_posts', include('vk_posts.urls')),
+    path('', include('vk_posts.urls')),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL,

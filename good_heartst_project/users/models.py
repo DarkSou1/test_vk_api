@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 
+from .validators import user_phonenumber_validator
+
 USER = 'user'
 MODERATOR = 'moderator'
 ADMIN = 'admin'
@@ -32,6 +34,12 @@ class MyUser(AbstractUser):
                             max_length=20,
                             choices=ROLES,
                             default=USER)
+    phone_number = models.CharField(verbose_name='Номер телефона пользователя',
+                                    unique=True,
+                                    max_length=20,
+                                    default='+7 999 999 99 99',
+                                    validators=(user_phonenumber_validator,))
+
 
     @property
     def is_user(self):

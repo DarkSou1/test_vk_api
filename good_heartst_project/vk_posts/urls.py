@@ -1,12 +1,12 @@
 from django.urls import path
-from .views import VkPostsList, AnimalList, DogView, DogSearchHome, CatSearchHome
+from .views import AnimalList, DogView, DogSearchHome, CatSearchHome, PostCreate
 
 app_name = 'vk_posts'
 
 urlpatterns = [
-    #path('', VkPostsList.as_view(), name='vk_posts'),
     path('', AnimalList.as_view(), name='cat_list'),
     path('dog/', DogView.as_view(), name='dog_list'),
     path('dog_search/', DogSearchHome.as_view(), name='Dog_search'),
     path('cat_search/', CatSearchHome.as_view(), name='Cat_search'),
+    path('post/', PostCreate.as_view(), name='post_create')
 ]

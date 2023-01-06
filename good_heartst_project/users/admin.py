@@ -8,5 +8,6 @@ class AdminUser(admin.ModelAdmin):
     list_display = ('username',
                     'role',
                     'email',
+                    'phone_number',
                     )
     search_fields = ('usermane',)

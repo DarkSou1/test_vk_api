@@ -38,13 +38,24 @@ AUTHENTICATION_BACKENDS = (
 SOCIAL_AUTH_VK_OAUTH2_KEY = os.getenv('SOCIAL_AUTH_VK_OAUTH2_KEY')
 SOCIAL_AUTH_VK_OAUTH2_SECRET = os.getenv('SOCIAL_AUTH_VK_OAUTH2_SECRET')
 
-SOCIAL_AUTH_VK_OAUTH2_SCOPE = ['email']
+# SOCIAL_AUTH_VK_OAUTH2_SCOPE = ['email', 'wall', 'photos', 'offline', 'groups', 'status',
+#                                'friends', 'audio', 'video', 'pages', ]
+
+# SOCIAL_AUTH_VK_OAUTH2_SCOPE = ['notify', 'friends', 'photos', 'audio',
+#                                'video', 'stories', 'pages', 'status',
+#                                'notes', 'messages', 'wall', 'ads',
+#                                'offline', 'docs', 'groups', 'notifications',
+#                                'stats', 'email', 'market']
+
+SOCIAL_AUTH_VK_OAUTH2_SCOPE = ['1073737727', ]
 
 SOCIAL_AUTH_URL_NAMESPACE = 'social'
 
 SOCIAL_AUTH_POSTGRES_JSONFIELD = True
 
-SOCIAL_AUTH_CREATE_USERS = True # разрешает создавать пользователей через social_auth
+SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/'
+
+SOCIAL_AUTH_CREATE_USERS = True  # разрешает создавать пользователей через social_auth
 
 SOCIAL_AUTH_PIPELINE = (
     'social_core.pipeline.social_auth.social_uid',
@@ -61,7 +72,7 @@ SOCIAL_AUTH_PIPELINE = (
     # Заполнить поле extra_data в социальной записи значениями
 )
 
-LOGIN_REDIRECT_URL = '/'
+# LOGIN_REDIRECT_URL = '/'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -89,7 +100,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'social_django.context_processors.backends',
-                'social_django.context_processors.login_redirect'
+                'social_django.context_processors.login_redirect',
                 # 'social.apps.django_app.context_processors.backends',
                 # 'social.apps.django_app.cont'
             ],
@@ -152,6 +163,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 STATIC_URL = 'static/'
+STATICFILES_DIRS = [os.path.join(BASE_DIR, "static"), ]
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'static')
 
