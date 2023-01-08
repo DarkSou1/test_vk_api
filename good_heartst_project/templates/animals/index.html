@@ -1,28 +1,24 @@
-{% include 'include/base.html'%}
+{% extends 'include/base.html'%}
 {% load static %}
 {% load thumbnail %}
 {% block content %} 
-{% for ani in animal%}
-<div class="container">
-    <div class="post">
-        <div class="post-image">
-            <img src="{{ ani.potho.url }}">
-        </div>
-        <div class="post-content">
-            <div class="post-header">
-                <a href ="{{ ani.get_absolute_url }}">
-                <h1>{{ani.title }}</h1></a>
-                <div class="post-meta">
-                    <time datetime="2019-04-01">{{ani.created_at}}</time>
-                    <span class="author">{{ani.author}} </span>
-                    <a href ="{% url 'animals:category' ani.category.pk %}">
-                    <span class="category">{{ani.category}}</span></a>
+    <div class="container">
+        <div class="list_title">Какой-то текст</div>
+        <div class="animal_cards"></div>
+            {% for item in cat%}
+                <div class="animal_card">
+                    <div class="preview">
+                        <div class="preview_img">
+                            <img src="{{ item.photo }}" width="370" height="300">
+                            <div class="preview_content">
+                                <div class="preview_text">{{ item.text_post|truncatechars:20 }}</div>
+                                <div class="preview_date">{{ item.date }}</div>
+                                
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <p>{{ani.contents|truncatewords:80|linebreaks }}
-            </p>
-        </div>
-    </div>
-</div>
+            </div>    
+    </div>    
+    
 {% endfor %}
 {% endblock%}

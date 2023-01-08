@@ -44,6 +44,14 @@ class AnimalList(ListView):
         return list_cat
 
 
+
+# class AnimalList(ListView):
+#     model = Vk_posts
+#     extra_context = {'title': 'Главная'}
+#     template_name = 'animals/index.html'
+    
+
+
 class DogView(ListView):
     model = Vk_posts
     paginate_by = 10

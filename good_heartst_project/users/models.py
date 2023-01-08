@@ -38,7 +38,8 @@ class MyUser(AbstractUser):
                                     unique=True,
                                     max_length=20,
                                     default='+7 999 999 99 99',
-                                    validators=(user_phonenumber_validator,))
+                                    # validators=(user_phonenumber_validator,)
+                                    )
 
 
     @property
